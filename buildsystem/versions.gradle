@@ -1,0 +1,162 @@
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin = "3.1.0-alpha09"
+versions.realm_plugin          = "4.3.2"
+versions.realm_extensions      = "2.1.0"
+//Support
+versions.arch               = hasProperty("ARCH_VERSION") ? getProperty("ARCH_VERSION") : "1.0.0"
+versions.support            = "27.0.2"
+versions.supportAnko        = "0.10.2"
+versions.kotlin             = "1.2.20"
+versions.mutidex            = "1.0.2"
+//Libraries :Core
+versions.calligraphy        = "2.3.0"
+versions.dagger             = "2.13"
+versions.constraint_layout  = "1.0.2"
+versions.logger             = "2.1.1"
+versions.rxjava2            = "2.1.7"
+versions.rxkotlin           = "2.2.0"
+versions.rx_android         = "2.0.1"
+versions.fresco             = "1.7.1"
+versions.eventbus           = "3.1.1"
+versions.retrofit           = "2.3.0"
+versions.okHttp             = "3.9.1"
+versions.okHttpLogging      = "2.0.3"
+versions.reactivenetwork    = "0.12.1"
+//Libraries: Development
+versions.leakCanary         = "1.5.4"
+versions.blockcanary        = "1.5.0"
+versions.stetho             = "1.5.0"
+versions.realmStetho        = "2.1.0"
+//Libraries :App
+versions.filedownloader     = "1.6.9"
+versions.jwtdecode          = "1.1.1"
+versions.joda               = "2.9.9"
+versions.qrcode             = "2.3.0"
+def deps = [:]
+
+def support = [:]
+support.annotations         = "com.android.support:support-annotations:$versions.support"
+support.app_compat          = "com.android.support:appcompat-v7:$versions.support"
+support.recyclerview        = "com.android.support:recyclerview-v7:$versions.support"
+support.cardview            = "com.android.support:cardview-v7:$versions.support"
+support.design              = "com.android.support:design:$versions.support"
+//support.palette             = "com.android.support:palette-v7:$versions.support"
+support.constraint_layout   = "com.android.support.constraint:constraint-layout:$versions.constraint_layout"
+deps.support = support
+/*
+
+def supportAnko = [:]
+support.commons             = "org.jetbrains.anko:anko-appcompat-v7-commons:$versions.supportAnko"
+support.app_compat          = "org.jetbrains.anko:anko-appcompat-v7:$versions.supportAnko"
+support.compat_coroutines   = "org.jetbrains.anko:anko-coroutines:$versions.supportAnko"
+support.recyclerview        = "org.jetbrains.anko:anko-recyclerview-v7:$versions.supportAnko"
+support.recycler_coroutines = "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$versions.supportAnko"
+support.cardview            = "org.jetbrains.anko:anko-cardview-v7:$versions.supportAnko"
+support.design              = "org.jetbrains.anko:anko-design:$versions.supportAnko"
+support.design_coroutines   = "org.jetbrains.anko:anko-design-coroutines:$versions.supportAnko"
+deps.supportAnko = supportAnko
+*/
+
+def core = [:]
+//core.calligraphy            = "uk.co.chrisjenx:calligraphy:$versions.calligraphy"
+core.fresco                 = "com.facebook.fresco:fresco:$versions.fresco"
+core.frescoOkhttp           = "com.facebook.fresco:imagepipeline-okhttp3:$versions.fresco"
+core.eventbus               = "org.greenrobot:eventbus:$versions.eventbus"
+//core.rxjava2              = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+core.rx_kotlin              = "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
+core.rx_android             = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+core.logger                 = "com.orhanobut:logger:$versions.logger"
+core.reactivenetwork        = "com.github.pwittchen:reactivenetwork-rx2:$versions.reactivenetwork"
+deps.core = core
+
+def room = [:]
+room.runtime                = "android.arch.persistence.room:runtime:$versions.arch"
+room.compiler               = "android.arch.persistence.room:compiler:$versions.arch"
+room.rxjava2                = "android.arch.persistence.room:rxjava2:$versions.arch"
+room.testing                = "android.arch.persistence.room:testing:$versions.arch"
+deps.room = room
+
+def lifecycle = [:]
+lifecycle.runtime           = "android.arch.lifecycle:runtime:$versions.arch"
+lifecycle.extensions        = "android.arch.lifecycle:extensions:$versions.arch"
+lifecycle.java8             = "android.arch.lifecycle:common-java8:$versions.arch"
+lifecycle.compiler          = "android.arch.lifecycle:compiler:$versions.arch"
+deps.lifecycle = lifecycle
+
+def arch_core = [:]
+arch_core.testing           = "android.arch.core:core-testing:$versions.arch"
+deps.arch_core = arch_core
+
+def retrofit = [:]
+retrofit.runtime            = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson               ="com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.rxjava             = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+retrofit.okhttp             = "com.squareup.okhttp3:okhttp:$versions.okHttp"
+retrofit.okhttpLogging      = "com.github.ihsanbal:LoggingInterceptor:$versions.okHttpLogging"
+deps.retrofit = retrofit
+
+def dagger = [:]
+dagger.runtime              = "com.google.dagger:dagger:$versions.dagger"
+dagger.android              = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support      = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler             = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+deps.dagger = dagger
+
+def library = [:]
+library.filedownloader      = "com.liulishuo.filedownloader:library:$versions.filedownloader"
+library.jwtdecode           = "com.auth0.android:jwtdecode:$versions.jwtdecode"
+library.qrcode              = "com.github.kenglxn.QRGen:android:$versions.qrcode"
+library.joda                = "joda-time:joda-time:$versions.joda"
+deps.library = library
+
+def test = [:]
+test.leakcanary             = "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary"
+test.leakcanary_no_op       = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary"
+test.leakcanary_no_op       = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakCanary"
+deps.test = test
+
+def kotlin = [:]
+kotlin.stdlib               = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+kotlin.test                 = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin               = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+deps.android_gradle_plugin  = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.databinding            = "com.android.databinding:compiler:$versions.android_gradle_plugin"
+deps.realm_plugin           = "io.realm:realm-gradle-plugin:$versions.realm_plugin"
+deps.realm_processor        = "io.realm:realm-annotations-processor:$versions.realm_plugin"
+deps.realm_extensions       = "com.github.vicpinm:krealmextensions:$versions.realm_extensions"
+deps.multidex               = "com.android.support:multidex:$versions.mutidex"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.app_id       = "com.acuteksolutions.uhotelnative"
+build_versions.build_tool   = "27.0.3"
+build_versions.min_sdk      = 21
+build_versions.target_sdk   = 27
+build_versions.versionCode  = 1
+build_versions.versionName  = "1.0.0"
+ext.build_versions = build_versions
+
+def key_store = [:]
+key_store.keystore          = "$rootProject.projectDir/buildsystem/keystore.jks"
+key_store.keystorePass      = "@nct@xms@box"
+key_store.alias             = "xms-box-keystore"
+key_store.aliasPass         = "@nct@xms@box"
+key_store.proguard_rules    = "$rootProject.projectDir/buildsystem/proguard-rules.pro"
+key_store.proguard_rx       = "$rootProject.projectDir/buildsystem/proguard-rx-rules.pro"
+key_store.proguard_square   = "$rootProject.projectDir/buildsystem/proguard-square.pro"
+key_store.proguard_support  = "$rootProject.projectDir/buildsystem/proguard-support.pro"
+ext.key_store = key_store
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots'
+        url 'https://jitpack.io'
+    }
+}
+ext.addRepos = this.&addRepos
