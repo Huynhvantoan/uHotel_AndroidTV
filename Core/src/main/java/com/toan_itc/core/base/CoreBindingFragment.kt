@@ -1,12 +1,10 @@
 package com.toan_itc.core.base
 
 import android.arch.lifecycle.ViewModelProvider
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.toan_itc.core.BR
 import com.toan_itc.core.base.widget.AutoClearedValue
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject

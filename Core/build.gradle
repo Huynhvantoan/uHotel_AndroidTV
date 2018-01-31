@@ -35,9 +35,11 @@ android {
             debuggable true
             minifyEnabled false
         }
-        dev {
-            debuggable true
+        poc {
+            signingConfig signingConfigs.Key
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
         }
         release {
             signingConfig signingConfigs.Key
@@ -56,9 +58,9 @@ dependencies {
     // Kotlin
     implementation deps.kotlin.stdlib
     // Support libraries
-    implementation deps.support.app_compat
-    implementation deps.support.annotations
-    implementation deps.support.design
+    for (dependency in deps.support) {
+        implementation dependency.value
+    }
     //Core
     for (dependency in deps.core) {
         implementation dependency.value
@@ -72,8 +74,11 @@ dependencies {
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
-    kapt deps.dagger.android_support_compiler
+    kapt deps.dagger.android_compiler
     kapt deps.dagger.compiler
-
+    // Test
+    debugImplementation deps.test.leakcanary
+    releaseImplementation deps.test.leakcanary_no_op
+    testImplementation deps.test.leakcanary_no_op
 }
 

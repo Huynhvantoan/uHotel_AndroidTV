@@ -1,11 +1,8 @@
 package com.toan_itc.core.base
 
 import android.arch.lifecycle.ViewModelProvider
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.view.LayoutInflater
-
-import com.toan_itc.core.BR
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 

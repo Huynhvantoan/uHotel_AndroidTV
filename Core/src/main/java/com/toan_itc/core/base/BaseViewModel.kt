@@ -3,10 +3,7 @@ package com.toan_itc.core.base
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModel
-import android.databinding.Observable
-import android.databinding.PropertyChangeRegistry
 import com.orhanobut.logger.Logger
-
 import com.toan_itc.core.base.event.Event
 import com.toan_itc.core.base.event.LiveBus
 import com.toan_itc.core.rxbus.RxBus

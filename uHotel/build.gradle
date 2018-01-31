@@ -38,20 +38,56 @@ android {
     }
     buildTypes {
         debug {
-            buildConfigField("String", "APP_NAME", "\"XmusicStation\"")
-            buildConfigField("String", "BASE_URL", "\"https://xmusic-station.nhaccuatui.com/v1/\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "ACUCORE_PATH", '"http://lv-api.acuteksolutions.com"'
+            buildConfigField "String", "ACUTOOL_PATH", '"http://lv-acutool.acuteksolutions.com"'
+            buildConfigField "String", "ACUMW_PATH", '"http://bsdev.acuteksolutions.com"'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://bsdev.acuteksolutions.com/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "TIME_SHIFT_PLAYBACK", '"http://lv-timeshifttv-dev.acuteksolutions.com/timeshifttv/playback/%1$s/%2$s.m3u8?start=%3$s&end=%4$s&continuous=%5$s"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://lv-acutool.acuteksolutions.com/devices/dcs"'
+            buildConfigField "String", "APP_UPDATE_URL_RELEASE", '"http://tuk-apk.acuteksolutions.com/uhotel/release/update_debug.xml"'
+            buildConfigField "String", "APP_UPDATE_URL_STAGING", '"http://tuk-apk.acuteksolutions.com/uhotel/stage/update_debug.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://tuk-apk.acuteksolutions.com/uhotel/stage/stream/%1$s"'
+            buildConfigField "String", "ROOM_CODE_URL", '"http://tuk-apk.acuteksolutions.com/uhotel/roomcode.xml"'
+            manifestPlaceholders = [sharedUserId:"com.acuteksolution.anyname"]
+
         }
-        dev {
-            buildConfigField("String", "APP_NAME", "\"XmusicStation\"")
-            buildConfigField("String", "BASE_URL", "\"http://192.168.100.112:8088/\"")
-        }
+        /*uhotel premium TV: 10.17.16.xx
+        * original: 10.17.12.xx*/
         release {
-            signingConfig signingConfigs.Key
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
-            buildConfigField("String", "APP_NAME", "\"XmusicStation\"")
-            buildConfigField("String", "BASE_URL", "\"https://xmusic-station.nhaccuatui.com/v1/\"")
+            buildConfigField "String", "ACUCORE_PATH", '"http://10.17.16.11:8181"'
+            buildConfigField "String", "ACUTOOL_PATH", '"http://10.17.16.12:8080"'
+            buildConfigField "String", "ACUMW_PATH", '"http://10.17.16.10"'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://10.17.16.10/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "TIME_SHIFT_PLAYBACK", '"http://10.17.16.16:8080/timeshifttv/playback/%1$s/%2$s.m3u8?start=%3$s&end=%4$s&continuous=%5$s"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://10.17.16.12:8080/devices/dcs"'
+            buildConfigField "String", "APP_UPDATE_URL_RELEASE", '"http://10.17.16.252/ota/uHotel/release/update_release.xml"'
+            buildConfigField "String", "APP_UPDATE_URL_STAGING", '"http://10.17.16.252/ota/uHotel/staging/update_release.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://10.17.16.252/streaming_apk/%1$s"'
+            buildConfigField "String", "ROOM_CODE_URL", '"http://10.17.16.252/uhotel/roomcode.xml"'
+            signingConfig signingConfigs.Key
+            manifestPlaceholders = [sharedUserId:"android.uid.system"]
+        }
+        poc {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    key_store.proguard_rules, key_store.proguard_rx, key_store.proguard_square, key_store.proguard_support
+            buildConfigField "String", "ACUCORE_PATH", '"http://poc-acucore.acuteksolutions.com"'
+            buildConfigField "String", "ACUTOOL_PATH", '"http://poc-acutool.acuteksolutions.com"'
+            buildConfigField "String", "ACUMW_PATH", '"http://poc-acumw.acuteksolutions.com"'
+            buildConfigField "String", "VOD_IMAGE_URL", '"http://poc-acumw.acuteksolutions.com/restapi/rest/{regionId}/images/"'
+            buildConfigField "String", "TIME_SHIFT_PLAYBACK", '"http://lv-timeshifttv-dev.acuteksolutions.com/timeshifttv/playback/%1$s/%2$s.m3u8?start=%3$s&end=%4$s&continuous=%5$s"'
+            buildConfigField "String", "WEB_SOCKET_PATH", '"ws://10.17.16.12:8080/devices/dcs"'
+            buildConfigField "String", "APP_UPDATE_URL_RELEASE", '"http://10.17.16.252/ota/demo/uhotelprm/release/update_release.xml"'
+            buildConfigField "String", "APP_UPDATE_URL_STAGING", '"http://10.17.16.252/ota/demo/uhotelprm/staging/update_release.xml"'
+            buildConfigField "String", "STREAM_APP_UPDATE_URL", '"http://10.17.16.252/streaming_apk/%1$s"'
+            buildConfigField "String", "ROOM_CODE_URL", '"http://10.17.16.252/uhotel/roomcode.xml"'
+            signingConfig signingConfigs.Key
+            debuggable true
         }
     }
     lintOptions {
@@ -112,18 +148,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':Core')
     implementation deps.multidex
-    implementation deps.realm_extensions
-    // Kotlin
-    implementation deps.kotlin.stdlib
-    // Support libraries
-    implementation deps.support.app_compat
-    implementation deps.support.annotations
-    implementation deps.support.design
-    //Core
-    implementation deps.core.logger
-    for (dependency in deps.core) {
-        implementation dependency.value
-    }
     //Retrofit
     for (dependency in deps.retrofit) {
         implementation dependency.value
@@ -132,21 +156,4 @@ dependencies {
     for (dependency in deps.library) {
         implementation dependency.value
     }
-    // Architecture components
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.extensions
-    implementation deps.lifecycle.java8
-    kapt deps.lifecycle.compiler
-    // Dagger 2
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
-    kapt deps.dagger.android_support_compiler
-    kapt deps.dagger.compiler
-    implementation deps.library.qrcode
-    implementation deps.library.joda
-    // Test
-    debugImplementation deps.test.leakcanary
-    releaseImplementation deps.test.leakcanary_no_op
-    testImplementation deps.test.leakcanary_no_op
 }
